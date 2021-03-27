@@ -1,25 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { createGlobalStyle } from 'styled-components'
+import BlockList from './components/BlockList';
+import { Header } from './components/Header';
+import SidePanel from './components/SidePanel';
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+`
+
+export const AppContainer = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+align-items: center;
+border:border-box;
+background-color:#e2e2e2;
+min-height:100vh;
+width:800px;
+border-left:1px solid gray;
+border-right:1px solid gray;
+margin:0 auto;
+position: relative;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <GlobalStyle />
+      <AppContainer>
+        <SidePanel />
+        <Header />
+        <BlockList />
+      </AppContainer>
+    </React.Fragment>
   );
 }
 
