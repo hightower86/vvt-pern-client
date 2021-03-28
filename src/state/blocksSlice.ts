@@ -11,11 +11,15 @@ export interface IBlock {
   bgColor: string;
 }
 
+export interface ICurrentBlock {
+  block: IBlock;
+  index: number;
+}
 export interface IBlocksState {
   blocks: IBlock[];
   error: null | string;
   isLoading: boolean;
-  currentBlock?: IBlock;
+  currentBlock: ICurrentBlock;
 }
 
 // Define the initial state using that type
@@ -23,7 +27,16 @@ const initialState: IBlocksState = {
   blocks: [],
   error: '',
   isLoading: false,
-  // currentBlock: undefined,
+  currentBlock: {
+    block: {
+      id: '',
+      text: '',
+      fontSize: '',
+      color: '',
+      bgColor: '',
+    },
+    index: 0,
+  },
 };
 
 export const blocksSlice = createSlice({
@@ -45,11 +58,13 @@ export const blocksSlice = createSlice({
     addBlock: (state, action: PayloadAction<IBlock>) => {
       state.blocks.push(action.payload);
     },
-    setCurrentBlock: (state, action: PayloadAction<IBlock>) => {
+    setCurrentBlock: (state, action: PayloadAction<ICurrentBlock>) => {
       state.currentBlock = action.payload;
     },
-    updateBlock: (state, action: PayloadAction<any>) => {
-      state.blocks[action.payload.idx] = action.payload.block;
+    updateBlock: (state, action: PayloadAction<ICurrentBlock>) => {
+      //debugger;
+
+      state.blocks[action.payload.index] = action.payload.block;
     },
   },
 });

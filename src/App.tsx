@@ -20,10 +20,10 @@ align-items: center;
 border:border-box;
 background-color:#e2e2e2;
 min-height:100vh;
-width:800px;
+width:500px;
 border-left:1px solid gray;
 border-right:1px solid gray;
-margin:0 auto;
+margin:0 10px 0 auto;
 position: relative;
 `
 

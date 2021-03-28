@@ -3,7 +3,11 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { IBlock, setCurrentBlock, updateBlock } from '../state/blocksSlice'
 
-const StyledBlock = styled.div`
+type Custom = {
+  bgColor?: string
+  fontSize?: string
+}
+const StyledBlock = styled.div<Custom>`
 
     border:1px solid gray;
     padding: 5px;
@@ -11,9 +15,12 @@ const StyledBlock = styled.div`
     margin: 5px 0px;
     &:focus{
       background-color: #bcc1e0
-    }
-
-`
+    };
+    color:${props => props.color};
+    background-color:${props => props.bgColor};
+    font-size:${props => props.fontSize}px;
+    `
+/* background-color:${props => props.bgColor}; */
 interface Props {
   block: IBlock
   idx: number
@@ -26,25 +33,32 @@ const Block = ({ block, idx }: Props) => {
   const dispatch = useDispatch()
 
   const handleOnFocus = () => {
-    console.log({ block })
-    dispatch(setCurrentBlock(block))
+    //console.log({ block })
+    dispatch(setCurrentBlock({ block, index: idx }))
   }
 
-  const handleOnChange = (e: React.FormEvent<HTMLDivElement>) => {
-    console.log(e.currentTarget.innerText);
-    console.dir(e)
-  }
+
   const handleOnInput = (e: React.FormEvent<HTMLDivElement>) => {
     const text = e.currentTarget.innerText
     console.log({ text });
     console.dir(e)
-    const block = { id: '', text, fontSize: '10px', color: 'blue', bgColor: 'red' }
-    dispatch(setCurrentBlock(block))
-    dispatch(updateBlock({ idx, block }))
+    const block = { id: '', text, fontSize: '', color: '', bgColor: '' }
+    dispatch(setCurrentBlock({ block, index: idx }))
+    dispatch(updateBlock({ index: idx, block }))
   }
+
+
   return (
-    <StyledBlock contentEditable={true} onFocus={handleOnFocus} onInput={(e) => handleOnInput(e)}
-      onChange={(e) => handleOnChange(e)} />
+    <StyledBlock
+      contentEditable={true}
+      onFocus={handleOnFocus}
+      onInput={(e) => handleOnInput(e)}
+      color={block.color}
+      bgColor={block.bgColor}
+      fontSize={block.fontSize}
+    >
+      {block.text}
+    </StyledBlock>
   )
 }
 

@@ -1,5 +1,7 @@
+import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { setCurrentBlock, updateBlock } from '../state/blocksSlice'
 import { IRootState } from '../state/store'
 
 const Panel = styled.div`
@@ -13,28 +15,77 @@ const Panel = styled.div`
 
 const Input = styled.input`
   padding:10px;
-  margin:10px 0
+  margin:10px 0;
+  width:100%
 `
 
 const TextArea = styled.textarea`
-  height:50px
+  height:100px;
+  width:100%
 `
 const Title = styled.h1`
   margin:20px 0px;
   color: #e9dada;
 `
 
+const InputGroup = styled.div`
+  color:white
+`
+
 const SidePanel = () => {
-  //const dispatch = useDispatch()
-  const { currentBlock } = useSelector((state: IRootState) => state.blocks)
+  const dispatch = useDispatch()
+  const { block, index } = useSelector((state: IRootState) => state.blocks.currentBlock)
+
+  const textRef = useRef()
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    console.log(e.target.value);
+    const { name, value } = e.target
+    console.log('name', name, 'value', value);
+    const newBlock = { ...block, [name]: value }
+    console.log({ newBlock });
+    dispatch(setCurrentBlock({ index, block: newBlock }))
+    dispatch(updateBlock({ index, block: newBlock }))
+  }
   return (
     <Panel>
       <Title>Settings</Title>
       <form action="">
-        <TextArea name='fontSize' placeholder='text content' value={currentBlock?.text} />
-        <Input name='fontSize' placeholder='font size' value={currentBlock?.fontSize} />
-        <Input name='textColor' type='text' placeholder='text color' value={currentBlock?.color} />
-        <Input name='bgColor' type='text' placeholder='background color' value={currentBlock?.bgColor} />
+        <InputGroup>
+          <label htmlFor='text'>Text:</label>
+          <TextArea
+            onChange={(e) => handleChange(e)}
+            name='text'
+            placeholder='text content'
+            //ref={textRef}
+            value={block.text}
+          />
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='fontSize'>Font size:</label>
+          <Input
+            style={{ width: 80, marginRight: 10 }}
+            onChange={(e) => handleChange(e)}
+            name='fontSize'
+            type='number'
+            value={block.fontSize} /><span>px</span>
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='color'>Text color:</label>
+          <Input
+            onChange={(e) => handleChange(e)}
+            name='color'
+            type='color'
+            value={block.color} />
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='bgColor'>Background color:</label>
+          <Input
+            onChange={(e) => handleChange(e)}
+            name='bgColor'
+            type='color'
+            value={block.bgColor} />
+        </InputGroup>
       </form>
 
     </Panel>

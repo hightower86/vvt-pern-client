@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { fetchBlocks } from '../state/actions'
+// import { fetchBlocks } from '../state/actions'
 import { IRootState } from '../state/store'
 import Block from './Block'
 
@@ -16,7 +16,7 @@ padding:10px 0
 
 const BlockList = () => {
 
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   const { blocks } = useSelector((state: IRootState) => state.blocks)
   console.log(blocks);
 
