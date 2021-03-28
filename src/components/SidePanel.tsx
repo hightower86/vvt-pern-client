@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { setCurrentBlock, updateBlock } from '../state/blocksSlice'
@@ -36,8 +35,6 @@ const SidePanel = () => {
   const dispatch = useDispatch()
   const { block, index } = useSelector((state: IRootState) => state.blocks.currentBlock)
 
-  const textRef = useRef()
-
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     console.log(e.target.value);
     const { name, value } = e.target
@@ -57,7 +54,6 @@ const SidePanel = () => {
             onChange={(e) => handleChange(e)}
             name='text'
             placeholder='text content'
-            //ref={textRef}
             value={block.text}
           />
         </InputGroup>
