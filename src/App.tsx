@@ -9,11 +9,12 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
   }
 `
 
 export const AppContainer = styled.div`
-font-family: Arial, Helvetica, sans-serif;
+
 display:flex;
 flex-direction:column;
 justify-content:flex-start;
