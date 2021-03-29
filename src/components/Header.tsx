@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { addBlock } from '../state/blocksSlice'
+import { addBlock } from '../state/actions'
+import { IBlock } from '../state/blocksSlice'
+//import { addBlock } from '../state/blocksSlice'
 
 const HeaderContainer = styled.div`
 display:flex;
@@ -20,13 +22,15 @@ const StyledButton = styled.button`
    color: #a70909
  }
 `
-
+export const defaultBlock: IBlock = {
+  text: '', fontSize: 16, color: '', bgColor: ''
+}
 
 export const Header = () => {
   const dispatch = useDispatch()
 
   const addBlockHandler = () => {
-    dispatch(addBlock({ id: '', text: '', fontSize: '', color: '', bgColor: '' }))
+    dispatch(addBlock(defaultBlock))
   }
 
   return (

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { setCurrentBlock, updateBlock } from '../state/blocksSlice'
+import { updateBlock } from '../state/actions'
+import { setCurrentBlock, updateBlockInList } from '../state/blocksSlice'
 import { IRootState } from '../state/store'
 
 const Panel = styled.div`
@@ -41,8 +42,10 @@ const SidePanel = () => {
     console.log('name', name, 'value', value);
     const newBlock = { ...block, [name]: value }
     console.log({ newBlock });
+    newBlock.fontSize = +newBlock.fontSize
     dispatch(setCurrentBlock({ index, block: newBlock }))
-    dispatch(updateBlock({ index, block: newBlock }))
+    dispatch(updateBlockInList({ index, block: newBlock }))
+    dispatch(updateBlock(newBlock))
   }
   return (
     <Panel>

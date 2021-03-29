@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export const AppContainer = styled.div`
+font-family: Arial, Helvetica, sans-serif;
 display:flex;
 flex-direction:column;
 justify-content:flex-start;
@@ -23,7 +24,7 @@ min-height:100vh;
 width:500px;
 border-left:1px solid gray;
 border-right:1px solid gray;
-margin:0 10px 0 auto;
+margin:0 30px 0 auto;
 position: relative;
 `
 

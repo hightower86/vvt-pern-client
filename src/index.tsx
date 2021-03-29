@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './state/store';
 
+console.log(process.env.REACT_APP_BASE_URL);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
