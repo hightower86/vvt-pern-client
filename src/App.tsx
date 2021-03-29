@@ -21,22 +21,29 @@ align-items: center;
 border:border-box;
 background-color:#e2e2e2;
 min-height:100vh;
-width:500px;
+width:100%;
 border-left:1px solid gray;
 border-right:1px solid gray;
-margin:0 30px 0 auto;
+margin:0  auto;
 position: relative;
+`
+
+export const Wrapper = styled.div`
+  display:flex;
+
 `
 
 function App() {
   return (
     <React.Fragment>
       <GlobalStyle />
-      <AppContainer>
+      <Wrapper>
         <SidePanel />
-        <Header />
-        <BlockList />
-      </AppContainer>
+        <AppContainer>
+          <Header />
+          <BlockList />
+        </AppContainer>
+      </Wrapper>
     </React.Fragment>
   );
 }

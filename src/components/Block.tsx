@@ -36,8 +36,8 @@ const DeleteButton = styled.div`
       background-color:#d44444;
       color:white;
       position: absolute;
-      top:5px;
-      right:-20px;
+      top:2px;
+      right:2px;
       &:hover{
         background-color:gray;
         cursor: pointer;
@@ -67,17 +67,17 @@ const Block = ({ block, idx }: Props) => {
 
   const handleOnInput = (e: React.FormEvent<HTMLDivElement>) => {
     const text = e.currentTarget.innerText
-    console.log({ text });
-    console.dir(e)
     const block = { ...currentBlock.block, text }
     dispatch(setCurrentBlock({ block, index: idx }))
-    dispatch(updateBlock(block))
   }
 
   const handleDeleteBlock = () => {
-    console.log('delete block');
     dispatch(deleteBlock(block.id!))
     setShowDelButton(false)
+  }
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    dispatch(updateBlock(currentBlock.block))
   }
   return (
     <div style={{ position: 'relative' }}>
@@ -86,6 +86,7 @@ const Block = ({ block, idx }: Props) => {
         suppressContentEditableWarning={true}
         onFocus={handleOnFocus}
         onInput={(e) => handleOnInput(e)}
+        onBlur={(e) => handleOnBlur(e)}
         color={block.color}
         bgColor={block.bgColor}
         fontSize={block.fontSize}

@@ -7,7 +7,8 @@ import { IRootState } from '../state/store'
 import Block from './Block'
 
 const BlocksContainer = styled.div`
-  padding:10px 0
+  padding:10px 0;
+  margin:0 auto;
 `
 
 const BlockList = () => {

@@ -13,9 +13,9 @@ export const apiAddBlock = (block: IBlock) => {
   return axios.post(`${BASE_URL}blocks`, { body }).then((res) => res.data);
 };
 export const apiUpdateBlock = (block: IBlock) => {
-  const body = block;
+  //const data = block;
   return axios
-    .put(`${BASE_URL}blocks/${block.id}`, { body })
+    .put(`${BASE_URL}blocks/${block.id}`, block)
     .then((res) => res.data);
 };
 export const apiDeleteBlock = (id: number) => {

@@ -5,9 +5,9 @@ import { setCurrentBlock, updateBlockInList } from '../state/blocksSlice'
 import { IRootState } from '../state/store'
 
 const Panel = styled.div`
-  width:200px;
+  width:300px;
   height:100vh;
-  position: fixed;
+  /* position: fixed; */
   background-color:#5b5bfc;
   left:0;
   padding:40px 10px
@@ -37,16 +37,20 @@ const SidePanel = () => {
   const { block, index } = useSelector((state: IRootState) => state.blocks.currentBlock)
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    console.log(e.target.value);
     const { name, value } = e.target
-    console.log('name', name, 'value', value);
     const newBlock = { ...block, [name]: value }
-    console.log({ newBlock });
     newBlock.fontSize = +newBlock.fontSize
     dispatch(setCurrentBlock({ index, block: newBlock }))
     dispatch(updateBlockInList({ index, block: newBlock }))
+  }
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLTextAreaElement> | React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    const newBlock = { ...block, [name]: value }
+    newBlock.fontSize = +newBlock.fontSize
     dispatch(updateBlock(newBlock))
   }
+
   return (
     <Panel>
       <Title>Settings</Title>
@@ -55,6 +59,7 @@ const SidePanel = () => {
           <label htmlFor='text'>Text:</label>
           <TextArea
             onChange={(e) => handleChange(e)}
+            onBlur={(e) => handleOnBlur(e)}
             name='text'
             placeholder='text content'
             value={block.text}
@@ -65,6 +70,7 @@ const SidePanel = () => {
           <Input
             style={{ width: 80, marginRight: 10 }}
             onChange={(e) => handleChange(e)}
+            onBlur={(e) => handleOnBlur(e)}
             name='fontSize'
             type='number'
             value={block.fontSize} /><span>px</span>
@@ -73,6 +79,7 @@ const SidePanel = () => {
           <label htmlFor='color'>Text color:</label>
           <Input
             onChange={(e) => handleChange(e)}
+            onBlur={(e) => handleOnBlur(e)}
             name='color'
             type='color'
             value={block.color} />
@@ -81,6 +88,7 @@ const SidePanel = () => {
           <label htmlFor='bgColor'>Background color:</label>
           <Input
             onChange={(e) => handleChange(e)}
+            onBlur={(e) => handleOnBlur(e)}
             name='bgColor'
             type='color'
             value={block.bgColor} />
